@@ -22,9 +22,9 @@
 
             <!-- if the user has created a profile -->
             {% else %}
-                <a href="catalogue">Catalogue</a>
-                <a href="create-plant">Create Plant</a>
-                <a href="details-profile">Profile</a>
+                <a href="{% url 'catalogue' %}">Catalogue</a>
+                <a href="{% url 'create-plant' %}">Create Plant</a>
+                <a href="{% url 'details-profile' %}">Profile</a>
             {% endif %}
         </nav>
     </header>

@@ -1,30 +1,42 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
+
+from MyPlants.mixins.mixins import ProfileContextMixin
+from MyPlants.plants.models import Plant
 from MyPlants.user_profile.models import Profile
+from django.views.generic import TemplateView, ListView, CreateView, DetailView, UpdateView, DeleteView
 
 
-def home_page(request):
-    profile = Profile.objects.first()
-    context = {
-        'profile': profile
-    }
-    return render(request, "home-page.html", context)
+class HomePage(ProfileContextMixin, TemplateView):
+    template_name = 'home-page.html'
 
 
-def catalogue(request):
-    pass
+class Catalogue(ProfileContextMixin, ListView):
+    template_name = 'catalogue.html'
+    model = Plant
 
 
-def create_plant(request):
-    pass
+class CreatePlant(ProfileContextMixin, CreateView):
+    template_name = 'plants/create-plant.html'
+    model = Plant
+    fields = '__all__'
+    success_url = reverse_lazy('catalogue')
 
 
-def details_plant(request, plant_id):
-    pass
+class DetailsPlant(ProfileContextMixin, DetailView):
+    template_name = 'plants/plant-details.html'
+    model = Plant
 
 
-def edit_plant(request, plant_id):
-    pass
+class EditPlant(ProfileContextMixin, UpdateView):
+    template_name = 'plants/edit-plant.html'
+    model = Plant
+    success_url = reverse_lazy('catalogue')
+    fields = '__all__'
 
 
-def delete_plant(request, plant_id):
-    pass
+class DeletePlant(ProfileContextMixin, DeleteView):
+    template_name = 'plants/delete-plant.html'
+    model = Plant
+    success_url = reverse_lazy('catalogue')
+
