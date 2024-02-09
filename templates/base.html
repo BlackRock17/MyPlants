@@ -24,7 +24,7 @@
             {% else %}
                 <a href="{% url 'catalogue' %}">Catalogue</a>
                 <a href="{% url 'create-plant' %}">Create Plant</a>
-                <a href="{% url 'details-profile' %}">Profile</a>
+                <a href="{% url 'details-profile' profile.pk %}">Profile</a>
             {% endif %}
         </nav>
     </header>
